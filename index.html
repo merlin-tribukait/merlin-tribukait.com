@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merlin Tribukait · Full-Stack Systems Architect & Game Core Engineer</title>
+  <meta name="description" content="Official portfolio and engineering ecosystem of Merlin Felix Tribukait. Specializing in C++17 MMORPG Cores, Network Protocol Reverse Engineering, Distributed Microservices & DevOps.">
+  <meta name="keywords" content="Merlin Tribukait, Systems Architect, C++ Game Server, Reverse Engineering, MMORPG Daemon, MU Origin 3, GAMES-REBORN, Protocol Intel, Node.js, MariaDB">
+  <meta name="author" content="Merlin Felix Tribukait">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Merlin Tribukait · Full-Stack Systems Architect & Game Core Engineer">
+  <meta property="og:description" content="Explore the projects, protocol intelligence, low-level game daemons, and software engineering ecosystem built by Merlin Tribukait.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://merlin-tribukait.com/">
+  <meta property="og:image" content="https://merlin-tribukait.com/assets/img/banner.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Particle Background & Ambient Glow Orbs -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-glow-container">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-brand">
+        <div class="brand-icon">MT</div>
+        <div class="brand-text">
+          <span class="brand-name">Merlin Tribukait</span>
+          <span class="brand-role">SYSTEMS ARCHITECT</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#stack" class="nav-link">Arsenal</a></li>
+        <li><a href="#projects" class="nav-link">Ecosystem</a></li>
+        <li><a href="#services" class="nav-link">Services & Capabilities</a></li>
+        <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+        <li><a href="#terminal" class="nav-link">Live Terminal</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="status-pill" title="Server online & responding">
+          <span class="status-dot"></span>
+          <span>ONLINE · 85.215.227.241</span>
+        </div>
+        <a href="#contact" class="btn btn-outline" style="padding: 0.45rem 1rem; font-size: 0.825rem;">Hire / Contact</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>⚡</span> Full-Stack Systems Architect & Game Core Engineer
+        </div>
+        <h1 class="hero-title">Merlin Felix Tribukait</h1>
+        
+        <div class="hero-typing">
+          <span id="heroTyping"></span>
+          <span class="typing-cursor"></span>
+        </div>
+
+        <p class="hero-desc">
+          Architecting high-concurrency game server daemons in C++17, reverse-engineering proprietary network protocols, building distributed Node.js/PM2 microservice clusters, and delivering enterprise-grade web applications from bare metal to browser.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            Explore Projects
+          </a>
+          <a href="#services" class="btn btn-secondary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            What I Can Build
+          </a>
+          <a href="#terminal" class="btn btn-outline">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            Launch CLI
+          </a>
+          <a href="#contact" class="btn btn-crimson">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            Contact Merlin
+          </a>
+        </div>
+
+        <!-- Key Metrics KPI Grid -->
+        <div class="hero-stats-grid">
+          <div class="glass-card stat-card">
+            <div class="stat-number">541+</div>
+            <div class="stat-label">Network Opcodes Mapped</div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-number">4,221</div>
+            <div class="stat-label">Binary DTO Schemas</div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-number">85</div>
+            <div class="stat-label">Game Core Systems</div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Production Mesh Uptime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Engineering Identity</div>
+        <h2 class="section-title">Architecting Complex Systems From The Ground Up</h2>
+        <p class="section-subtitle">Deep expertise across low-level binary protocols, high-throughput game engines, and modern distributed web platforms.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I am <span class="about-highlight">Merlin Felix Tribukait</span>, a Full-Stack Systems Architect, Game Engine Developer, and Low-Level Reverse Engineer. My engineering focus centers on building resilient, ultra-high performance distributed platforms that scale under heavy real-time concurrency.
+          </p>
+          <p>
+            Whether dissecting proprietary packet framing with Wireshark and Ghidra to reconstruct full MMORPG server architectures, developing multi-threaded C++17 game daemons with MariaDB pooling, or engineering responsive, real-time Node.js/Next.js platforms with zero-downtime clustering — I build end-to-end solutions that bridge low-level infrastructure with polished web user experiences.
+          </p>
+          <p>
+            My engineering philosophy is rooted in <span class="about-highlight">modular architecture, deterministic memory management, high availability, and absolute protocol precision</span>.
+          </p>
+          <div>
+            <a href="https://github.com/merlin-tribukait" target="_blank" rel="noopener" class="btn btn-secondary">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              View GitHub Profile (@merlin-tribukait)
+            </a>
+          </div>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="glass-card pillar-card">
+            <div class="pillar-icon">⚡</div>
+            <h3 class="pillar-title">Low-Latency Game Cores</h3>
+            <p class="pillar-desc">Designing multi-threaded C++17/20 game servers, non-blocking asynchronous socket I/O, custom packet encryption, and combat state engines.</p>
+          </div>
+          <div class="glass-card pillar-card">
+            <div class="pillar-icon">🔬</div>
+            <h3 class="pillar-title">Protocol Reverse Engineering</h3>
+            <p class="pillar-desc">Deep disassembly of network streams, IL2CPP dumps, binary serialization schema mapping, and clean-room protocol recreation.</p>
+          </div>
+          <div class="glass-card pillar-card">
+            <div class="pillar-icon">🌐</div>
+            <h3 class="pillar-title">Full-Stack & Microservices</h3>
+            <p class="pillar-desc">High-throughput Node.js microservices, Next.js web applications, WebSocket real-time feeds, and unified OAuth2/JWT auth providers.</p>
+          </div>
+          <div class="glass-card pillar-card">
+            <div class="pillar-icon">🛡️</div>
+            <h3 class="pillar-title">DevOps & High Availability</h3>
+            <p class="pillar-desc">Linux server hardening, Nginx load balancing, MariaDB database optimization, automated Let's Encrypt TLS, and PM2 zero-downtime clustering.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Arsenal / Skills Section -->
+  <section class="section" id="stack">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Technical Arsenal</div>
+        <h2 class="section-title">Languages, Protocols & Architectures</h2>
+        <p class="section-subtitle">A battle-tested technical stack built for speed, reliability, and extreme system scalability.</p>
+      </div>
+
+      <div class="stack-grid">
+        <!-- Card 1 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">⚙️</div>
+            <div class="stack-title">Core Languages</div>
+          </div>
+          <div class="stack-tags">
+            <span class="stack-tag">C++17 / C++20</span>
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">JavaScript (ESNext)</span>
+            <span class="stack-tag">Python 3.12+</span>
+            <span class="stack-tag">SQL (MariaDB/MySQL)</span>
+            <span class="stack-tag">Bash / POSIX Shell</span>
+            <span class="stack-tag">C# / .NET</span>
+            <span class="stack-tag">Kotlin / Java</span>
+          </div>
+          <p class="stack-desc">Writing high-performance compiled code, type-safe backend microservices, database procedures, and native client integrations.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">🎮</div>
+            <div class="stack-title">Game & Protocol Dev</div>
+          </div>
+          <div class="stack-tags">
+            <span class="stack-tag">Protocol Disassembly</span>
+            <span class="stack-tag">Wireshark & Packet Sniffing</span>
+            <span class="stack-tag">Ghidra / IL2CPP</span>
+            <span class="stack-tag">541 Opcodes Mapped</span>
+            <span class="stack-tag">4,221 DTO Schemas</span>
+            <span class="stack-tag">Socket Framing</span>
+            <span class="stack-tag">MMORPG State Engine</span>
+            <span class="stack-tag">Combat Formulas</span>
+          </div>
+          <p class="stack-desc">Clean-room reverse engineering, packet serialization, memory disassembly, and real-time state synchronization for multiplayer game servers.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">🌐</div>
+            <div class="stack-title">Backend & Microservices</div>
+          </div>
+          <div class="stack-tags">
+            <span class="stack-tag">Node.js Micro-Apps</span>
+            <span class="stack-tag">PM2 Clustered Mesh</span>
+            <span class="stack-tag">MariaDB Connection Pools</span>
+            <span class="stack-tag">Redis In-Memory Cache</span>
+            <span class="stack-tag">WebSockets Telemetry</span>
+            <span class="stack-tag">RESTful & RPC APIs</span>
+            <span class="stack-tag">JWT & OAuth2 IdP</span>
+          </div>
+          <p class="stack-desc">Architecting zero-downtime distributed backends capable of serving thousands of concurrent game and web connections simultaneously.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">🎨</div>
+            <div class="stack-title">Frontend & UI Engineering</div>
+          </div>
+          <div class="stack-tags">
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Tailwind CSS</span>
+            <span class="stack-tag">Primer Design Tokens</span>
+            <span class="stack-tag">Glassmorphism UI</span>
+            <span class="stack-tag">Real-Time GM Consoles</span>
+            <span class="stack-tag">Canvas Visualizers</span>
+          </div>
+          <p class="stack-desc">Creating reactive, high-speed user interfaces, player dashboards, GM consoles, and e-commerce payment checkouts with modern aesthetics.</p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">🛡️</div>
+            <div class="stack-title">DevOps & Cloud Systems</div>
+          </div>
+          <div class="stack-tags">
+            <span class="stack-tag">Linux (Debian/Ubuntu)</span>
+            <span class="stack-tag">Nginx Reverse Proxy</span>
+            <span class="stack-tag">Let's Encrypt TLS 1.3</span>
+            <span class="stack-tag">Git / GitHub CLI</span>
+            <span class="stack-tag">Firewall & Hardening</span>
+            <span class="stack-tag">Zero-Downtime Deploy</span>
+            <span class="stack-tag">Dual-Stack IPv4/IPv6</span>
+          </div>
+          <p class="stack-desc">Server infrastructure engineering, network routing, automated certificate provisioning, process supervisors, and security auditing.</p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">📱</div>
+            <div class="stack-title">Native Clients & Mobile</div>
+          </div>
+          <div class="stack-tags">
+            <span class="stack-tag">Android SDK</span>
+            <span class="stack-tag">Gradle Automation</span>
+            <span class="stack-tag">APK Packaging</span>
+            <span class="stack-tag">SSL Pinning Bypass</span>
+            <span class="stack-tag">Avalonia / Electron</span>
+            <span class="stack-tag">SHA-256 Delta Patching</span>
+            <span class="stack-tag">MCP AI Tooling</span>
+          </div>
+          <p class="stack-desc">Building custom desktop and Android game launchers, client-side hooking layers, asset auto-patchers, and automated developer tooling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects & Ecosystem Section -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Production Ecosystem</div>
+        <h2 class="section-title">Featured Projects & Live Platforms</h2>
+        <p class="section-subtitle">Real-world production platforms, reverse-engineered game engines, and developer knowledge bases.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="glass-card project-card">
+          <div class="project-top">
+            <div class="project-badge-row">
+              <span class="project-badge badge-live">● Live Platform</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted);">games-reborn.com</span>
+            </div>
+            <h3 class="project-title">GAMES-REBORN Multi-Realm MMORPG Platform</h3>
+            <p class="project-desc">
+              High-concurrency Node.js multi-realm gaming platform. Integrates micro-app architecture, centralized player portal, live diamond recharge store, gift code redemption engine, and real-time WebSocket telemetry.
+            </p>
+            <ul class="project-features">
+              <li>PM2 Clustered Micro-Apps (Portal, MU3, Admin, Billing)</li>
+              <li>WebSocket Real-Time Live Server Stats</li>
+              <li>Universal OAuth2 / JWT Identity Provider</li>
+              <li>Integrated Superadmin & GM Control Suite</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag">TypeScript</span>
+            <span class="project-tag">Next.js</span>
+            <span class="project-tag">MariaDB</span>
+            <span class="project-tag">PM2</span>
+            <span class="project-tag">WebSockets</span>
+          </div>
+          <div class="project-links">
+            <a href="https://games-reborn.com" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Visit Portal</a>
+            <a href="https://admin.games-reborn.com" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">GM Suite</a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-card project-card">
+          <div class="project-top">
+            <div class="project-badge-row">
+              <span class="project-badge badge-core">★ C++17 Core</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted);">mu3-server</span>
+            </div>
+            <h3 class="project-title">MU3-Server C++17 Game Daemon Core</h3>
+            <p class="project-desc">
+              Clean-room C++17 private game server core for MU Origin 3. Reverse-engineered from scratch with 541 mapped network opcodes, 4,221 binary DTO schemas, and 85 canonical game systems.
+            </p>
+            <ul class="project-features">
+              <li>541 Opcodes & 4,221 DTO Packet Parsers</li>
+              <li>85 Systems (Combat, Quests, Guilds, World Bosses)</li>
+              <li>MariaDB Parameterized Connection Pool</li>
+              <li>Embedded HTTP/HTTPS Admin REST API (Port 8088)</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">C++17</span>
+            <span class="project-tag">Socket I/O</span>
+            <span class="project-tag">OpenSSL</span>
+            <span class="project-tag">MariaDB</span>
+            <span class="project-tag">IL2CPP</span>
+            <span class="project-tag">Linux Daemon</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/merlin-tribukait/mu3-server" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">GitHub Repo</a>
+            <a href="#terminal" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Inspect Specs</a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass-card project-card">
+          <div class="project-top">
+            <div class="project-badge-row">
+              <span class="project-badge badge-live">● Live Intel Hub</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted);">docs.merlin-tribukait.com</span>
+            </div>
+            <h3 class="project-title">Protocol Intel & Architecture Documentation Hub</h3>
+            <p class="project-desc">
+              Comprehensive technical knowledge base detailing enterprise system architecture, authentication specifications, anti-cheat mechanisms, mobile client patching, and repository standards.
+            </p>
+            <ul class="project-features">
+              <li>OurNuts Master Client & Device Spoofing Guide</li>
+              <li>Enterprise Clean-Room MMORPG Blueprints</li>
+              <li>Security, Anti-Cheat & Packet Interception Specs</li>
+              <li>Standardized Polyrepo Architecture</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Technical Docs</span>
+            <span class="project-tag">Primer System</span>
+            <span class="project-tag">Architecture</span>
+            <span class="project-tag">Security</span>
+            <span class="project-tag">HTML5</span>
+          </div>
+          <div class="project-links">
+            <a href="https://docs.merlin-tribukait.com" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Read Documentation</a>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="glass-card project-card">
+          <div class="project-top">
+            <div class="project-badge-row">
+              <span class="project-badge badge-dev">◆ Mobile & SDK</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted);">ournuts-mobile</span>
+            </div>
+            <h3 class="project-title">OurNuts Client Manager & Android Tooling</h3>
+            <p class="project-desc">
+              Client management and mobile runtime toolkit for mobile MMORPG clients. Implements SDK emulation, device fingerprint spoofing, SSL pinning bypass, and automated game asset patching.
+            </p>
+            <ul class="project-features">
+              <li>Android SDK & Gradle Packaging Tooling</li>
+              <li>Dynamic SSL Pinning & DNS Bypass</li>
+              <li>Client UI Scaling & Region Configurator</li>
+              <li>In-Game Webview & Auth Hooking</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Android SDK</span>
+            <span class="project-tag">Java/Kotlin</span>
+            <span class="project-tag">Gradle</span>
+            <span class="project-tag">SSL Pinning</span>
+            <span class="project-tag">Hooking</span>
+          </div>
+          <div class="project-links">
+            <a href="https://docs.merlin-tribukait.com/ournuts-master-guide.html" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">View Architecture</a>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="glass-card project-card">
+          <div class="project-top">
+            <div class="project-badge-row">
+              <span class="project-badge badge-live">● Design System</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted);">brands.games-reborn.com</span>
+            </div>
+            <h3 class="project-title">Games-Reborn Brand Design System v2.0</h3>
+            <p class="project-desc">
+              Full-fidelity design system and asset pipeline. Features 3D metallic crest emblems, responsive SVG vector lockups, typography scales, dark-mode CSS tokens, and web component showcases.
+            </p>
+            <ul class="project-features">
+              <li>Vector SVG Emblem & Typography Pipeline</li>
+              <li>Dark Obsidian & Cyber Accent Color Tokens</li>
+              <li>Automated Python Vectorizer Scripts</li>
+              <li>Interactive Brand Guidebook & Component Hub</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">SVG Vectors</span>
+            <span class="project-tag">CSS3 Tokens</span>
+            <span class="project-tag">UI/UX</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Design System</span>
+          </div>
+          <div class="project-links">
+            <a href="https://brands.games-reborn.com" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Explore Brand Hub</a>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="glass-card project-card">
+          <div class="project-top">
+            <div class="project-badge-row">
+              <span class="project-badge badge-core">⚡ Utility</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted);">KEY-BITCHER</span>
+            </div>
+            <h3 class="project-title">KEY-BITCHER Security & Key Manager</h3>
+            <p class="project-desc">
+              High-efficiency cryptographic credential and API key orchestrator. Automates developer workflow authentication, token rotation, and secure access across multi-cluster environments.
+            </p>
+            <ul class="project-features">
+              <li>Cryptographic Key Management & Rotation</li>
+              <li>Developer Environment Token Sync</li>
+              <li>Secure Credential Storage & Injection</li>
+              <li>Fast Shell CLI Integration</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Security</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Cryptography</span>
+            <span class="project-tag">CLI</span>
+            <span class="project-tag">Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/merlin-tribukait/KEY-BITCHER" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">GitHub Repo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Possibilities & What I Can Program (Services) Section -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Capabilities & Possibilities</div>
+        <h2 class="section-title">What I Can Program & Deliver For You</h2>
+        <p class="section-subtitle">From custom game server engines to high-throughput web platforms, here is what I can architect, code, and deploy.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="glass-card service-card">
+          <div class="service-number">01 / LOW-LEVEL CORE</div>
+          <h3 class="service-title">Custom Game Server Architecture</h3>
+          <p class="service-desc">
+            End-to-end engineering of dedicated multiplayer and MMORPG game servers in modern C++17/20 or Node.js. Built for high player concurrency, low tick latency, and atomic state handling.
+          </p>
+          <ul class="service-deliverables">
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Non-blocking async socket handlers (TCP, UDP, WebSocket)</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Custom spatial indexing, combat mechanics & world state</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Cross-server clustering & matchmaker synchronizers</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="glass-card service-card">
+          <div class="service-number">02 / REVERSE ENGINEERING</div>
+          <h3 class="service-title">Protocol Disassembly & Emulation</h3>
+          <p class="service-desc">
+            Dissecting proprietary binary network protocols from packet captures (Wireshark) and IL2CPP / Unity / Unreal binaries. Extracting full DTO serialization schemas and building faithful emulator servers.
+          </p>
+          <ul class="service-deliverables">
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Opcode mapping & packet structural deserialization</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Clean-room mock server & test harness creation</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Automated DTO code generation in C++, TypeScript & C#</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="glass-card service-card">
+          <div class="service-number">03 / FULL-STACK PLATFORMS</div>
+          <h3 class="service-title">High-Throughput Web Platforms & APIs</h3>
+          <p class="service-desc">
+            Developing enterprise web suites, player dashboards, payment and billing checkouts, and real-time administration portals powered by Next.js, Node.js, and WebSockets.
+          </p>
+          <ul class="service-deliverables">
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Micro-app architecture with PM2 clustering</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Real-time GM monitoring consoles with live metrics</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Secure payment gateways & CDK gift voucher engines</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="glass-card service-card">
+          <div class="service-number">04 / CLIENTS & LAUNCHERS</div>
+          <h3 class="service-title">Cross-Platform Launchers & Auto-Patchers</h3>
+          <p class="service-desc">
+            Custom desktop (Windows/Linux/macOS) and Android game launcher development with cryptographic file integrity verification, differential delta-patching, and UI theming.
+          </p>
+          <ul class="service-deliverables">
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>SHA-256 binary hash checking & delta byte streaming</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Android APK loader packaging & SSL unpinning</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Multi-region server selector & cloud settings sync</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="glass-card service-card">
+          <div class="service-number">05 / INFRASTRUCTURE & DB</div>
+          <h3 class="service-title">Database Tuning & Cloud DevOps</h3>
+          <p class="service-desc">
+            MariaDB schema optimization, high-throughput indexing, Nginx multi-domain reverse proxy routing, Let's Encrypt automated TLS, and Linux system security hardening.
+          </p>
+          <ul class="service-deliverables">
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Parameterized query tuning & connection pooling</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Nginx load balancing & HTTP/2 + TLS 1.3 configuration</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Zero-downtime hot reloading & health monitoring</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="glass-card service-card">
+          <div class="service-number">06 / AI & AUTOMATION</div>
+          <h3 class="service-title">Developer Automation & MCP Agents</h3>
+          <p class="service-desc">
+            Custom developer tooling, automated CI/CD pipelines, and Model Context Protocol (MCP) server development to bridge AI coding agents with production databases and CLI tools.
+          </p>
+          <ul class="service-deliverables">
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Model Context Protocol (MCP) tool server integration</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Custom CLI utilities for deployment & log aggregation</span>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Automated GitHub Actions workflows & packaging</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap & What's Coming Next Section -->
+  <section class="section" id="roadmap">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Forward Vision</div>
+        <h2 class="section-title">What's Coming Next From Me</h2>
+        <p class="section-subtitle">Upcoming releases, major milestones, and open-source platforms currently under development.</p>
+      </div>
+
+      <div class="roadmap-timeline">
+        <!-- Milestone 1 -->
+        <div class="roadmap-item">
+          <div class="roadmap-node">Q4 26</div>
+          <div class="glass-card roadmap-content">
+            <div class="roadmap-meta">
+              <span class="roadmap-tag">Major Release</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg-muted);">GAMES-REBORN</span>
+            </div>
+            <h3 class="roadmap-title">GAMES-REBORN Multi-Realm Open Beta Public Launch</h3>
+            <p class="roadmap-desc">
+              Public network deployment featuring multi-region realm routing, live web player dashboard, cross-realm ladder rankings, and automated account registration.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="roadmap-item">
+          <div class="roadmap-node">Q4 26</div>
+          <div class="glass-card roadmap-content">
+            <div class="roadmap-meta">
+              <span class="roadmap-tag">Daemon Core</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg-muted);">mu3-server v2.0</span>
+            </div>
+            <h3 class="roadmap-title">MU Origin 3 Core v2.0 & Cross-Server PvP Clusters</h3>
+            <p class="roadmap-desc">
+              Finalizing real-time PvP 3v3 / 5v5 battlegrounds, Cross-Server Guild Siege Warfare, and dynamic world boss scheduling with instant drop synchronization.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="roadmap-item">
+          <div class="roadmap-node">Q1 27</div>
+          <div class="glass-card roadmap-content">
+            <div class="roadmap-meta">
+              <span class="roadmap-tag">Open Source Tool</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg-muted);">Web Protocol Tool</span>
+            </div>
+            <h3 class="roadmap-title">Interactive Web Protocol Disassembler & DTO Explorer</h3>
+            <p class="roadmap-desc">
+              Browser-based reverse-engineering GUI allowing game developers to explore 541+ opcodes, inspect binary packet schemas, and auto-export typed structs for C++, TypeScript, and C#.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 4 -->
+        <div class="roadmap-item">
+          <div class="roadmap-node">Q1 27</div>
+          <div class="glass-card roadmap-content">
+            <div class="roadmap-meta">
+              <span class="roadmap-tag">Client Suite</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg-muted);">Launcher v3.0</span>
+            </div>
+            <h3 class="roadmap-title">Universal Cross-Platform Game Launcher v3.0</h3>
+            <p class="roadmap-desc">
+              Unified launcher for Windows, macOS, Linux, and Android APK deployment with seamless cloud-synced player configs, instant delta patching, and built-in community feed.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 5 -->
+        <div class="roadmap-item">
+          <div class="roadmap-node">Q2 27</div>
+          <div class="glass-card roadmap-content">
+            <div class="roadmap-meta">
+              <span class="roadmap-tag">AI Telemetry</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg-muted);">Anti-Cheat AI</span>
+            </div>
+            <h3 class="roadmap-title">AI-Assisted Real-Time Game Telemetry & Anti-Cheat Agent</h3>
+            <p class="roadmap-desc">
+              Machine-learning packet anomaly detector that monitors live network streams, identifying unauthorized memory manipulations, packet injection, and botting patterns with zero false positives.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Terminal Section -->
+  <section class="section" id="terminal">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Interactive CLI</div>
+        <h2 class="section-title">Live Systems Console</h2>
+        <p class="section-subtitle">Run simulated terminal commands to inspect server specs, project data, and engineering credentials.</p>
+      </div>
+
+      <div class="terminal-wrapper">
+        <div class="terminal-header">
+          <div class="terminal-buttons">
+            <span class="term-btn term-close"></span>
+            <span class="term-btn term-min"></span>
+            <span class="term-btn term-max"></span>
+          </div>
+          <div class="terminal-title">guest@merlin-tribukait: ~ (bash / xterm-256color)</div>
+          <div class="terminal-actions">
+            <button class="term-quick-btn" data-cmd="help">help</button>
+            <button class="term-quick-btn" data-cmd="about">about</button>
+            <button class="term-quick-btn" data-cmd="skills">skills</button>
+            <button class="term-quick-btn" data-cmd="projects">projects</button>
+            <button class="term-quick-btn" data-cmd="specs">specs</button>
+            <button class="term-quick-btn" data-cmd="matrix">matrix</button>
+            <button class="term-quick-btn" data-cmd="clear">clear</button>
+          </div>
+        </div>
+
+        <div class="terminal-body" id="terminalBody"></div>
+
+        <div style="background: #11111a; padding: 0.75rem 1.5rem; border-top: 1px solid var(--border-subtle);">
+          <div class="term-input-row">
+            <span class="term-prompt">guest@merlin-tribukait:~$</span>
+            <input type="text" class="term-input" id="termInput" placeholder="Type a command (e.g. 'help', 'specs', 'services', 'contact')..." autocomplete="off" spellcheck="false">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Inquiry Section -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-title">Let's Build Something Exceptional</h2>
+        <p class="section-subtitle">Have a project, game architecture challenge, reverse-engineering need, or contract inquiry? Reach out directly.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Info Card -->
+        <div class="glass-card contact-info-card">
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-detail-title">Direct Email</div>
+              <div class="contact-detail-value">
+                <span>merlin_felix_@hotmail.com</span>
+                <button class="copy-btn" data-copy="merlin_felix_@hotmail.com">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🐙</div>
+            <div>
+              <div class="contact-detail-title">GitHub Profile</div>
+              <div class="contact-detail-value">
+                <a href="https://github.com/merlin-tribukait" target="_blank" rel="noopener">github.com/merlin-tribukait</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div>
+              <div class="contact-detail-title">Platform Ecosystem</div>
+              <div class="contact-detail-value">
+                <a href="https://games-reborn.com" target="_blank" rel="noopener">games-reborn.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📚</div>
+            <div>
+              <div class="contact-detail-title">Documentation Portal</div>
+              <div class="contact-detail-value">
+                <a href="https://docs.merlin-tribukait.com" target="_blank" rel="noopener">docs.merlin-tribukait.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1rem; padding: 1.25rem; background: rgba(0, 240, 255, 0.04); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: var(--radius-sm);">
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.35rem;">
+              ● CONTRACT & ARCHITECTURE AVAILABILITY
+            </div>
+            <p style="font-size: 0.85rem; color: var(--fg-secondary); line-height: 1.5;">
+              Available for select technical architecture consulting, custom game daemon development, reverse engineering audits, and high-concurrency systems design.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Form Card -->
+        <div class="glass-card contact-form-card">
+          <form id="contactForm">
+            <div class="form-group">
+              <label class="form-label" for="formName">Your Name</label>
+              <input type="text" id="formName" class="form-input" placeholder="e.g. Alex Morgan" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="formEmail">Your Email</label>
+              <input type="email" id="formEmail" class="form-input" placeholder="e.g. alex@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="formSubject">Subject / Project Type</label>
+              <input type="text" id="formSubject" class="form-input" placeholder="e.g. MMORPG Daemon Development / Protocol Consulting" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="formMessage">Message & Project Scope</label>
+              <textarea id="formMessage" class="form-textarea" placeholder="Tell me about your project scope, technical requirements, and timeline..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              Send Message To Merlin
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="nav-brand" style="margin-bottom: 0.5rem;">
+            <div class="brand-icon">MT</div>
+            <div class="brand-text">
+              <span class="brand-name">Merlin Tribukait</span>
+              <span class="brand-role">SYSTEMS ARCHITECT & CORE ENGINEER</span>
+            </div>
+          </div>
+          <p class="footer-brand-desc">
+            High-concurrency C++17 game server daemons, proprietary network protocol reverse engineering, distributed Node.js/PM2 microservice meshes, and resilient cloud infrastructures.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#about" class="footer-link">About Merlin</a></li>
+            <li><a href="#stack" class="footer-link">Technical Stack</a></li>
+            <li><a href="#projects" class="footer-link">Projects & Systems</a></li>
+            <li><a href="#services" class="footer-link">Services & Capabilities</a></li>
+            <li><a href="#roadmap" class="footer-link">Future Roadmap</a></li>
+            <li><a href="#terminal" class="footer-link">Interactive Terminal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Ecosystem Sites</h4>
+          <ul class="footer-links">
+            <li><a href="https://games-reborn.com" target="_blank" rel="noopener" class="footer-link">games-reborn.com</a></li>
+            <li><a href="https://docs.merlin-tribukait.com" target="_blank" rel="noopener" class="footer-link">docs.merlin-tribukait.com</a></li>
+            <li><a href="https://brands.games-reborn.com" target="_blank" rel="noopener" class="footer-link">brands.games-reborn.com</a></li>
+            <li><a href="https://wiki.games-reborn.com" target="_blank" rel="noopener" class="footer-link">wiki.games-reborn.com</a></li>
+            <li><a href="https://admin.games-reborn.com" target="_blank" rel="noopener" class="footer-link">admin.games-reborn.com</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Connect</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:merlin_felix_@hotmail.com" class="footer-link">merlin_felix_@hotmail.com</a></li>
+            <li><a href="https://github.com/merlin-tribukait" target="_blank" rel="noopener" class="footer-link">GitHub @merlin-tribukait</a></li>
+            <li><span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-emerald);">● Dual-Stack TLS 1.3 Active</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Merlin Felix Tribukait. All rights reserved.
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.75rem;">
+          Host: 85.215.227.241 (Frankfurt, EU) · TLS 1.3 · Powered by C++17 & Node.js Mesh
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
