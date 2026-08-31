@@ -126,6 +126,8 @@ function initAudioSynthesizer() {
    MOUSE SPOTLIGHT & PARALLAX TRACKER
    ============================================================================== */
 function initMouseSpotlight() {
+  if ('ontouchstart' in window || window.innerWidth < 768) return;
+
   window.addEventListener('mousemove', (e) => {
     const x = e.clientX;
     const y = e.clientY;
@@ -340,7 +342,7 @@ function initTypingEffect() {
 }
 
 /* ==============================================================================
-   INTERACTIVE PARTICLE CANVAS WITH CURSOR LIGHTNING ARCS
+   INTERACTIVE PARTICLE CANVAS (ADAPTIVE BATTERY/PERFORMANCE ENGINE)
    ============================================================================== */
 function initBackgroundCanvas() {
   const canvas = document.getElementById('bg-canvas');
@@ -351,22 +353,34 @@ function initBackgroundCanvas() {
   let particles = [];
   let isRunning = true;
 
-  const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 18 : 46;
-  const maxDistance = isMobile ? 100 : 140;
+  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  if (prefersReducedMotion) {
+    canvas.style.display = 'none';
+    return;
+  }
+
+  const particleCount = isMobile ? 14 : 42;
+  const maxDistance = isMobile ? 85 : 140;
 
   let mouseX = -9999;
   let mouseY = -9999;
+  let lastFrameTime = 0;
+  const fpsLimit = isMobile ? 30 : 60;
+  const frameInterval = 1000 / fpsLimit;
 
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  }, { passive: true });
+  if (!isMobile) {
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
 
-  window.addEventListener('mouseleave', () => {
-    mouseX = -9999;
-    mouseY = -9999;
-  });
+    window.addEventListener('mouseleave', () => {
+      mouseX = -9999;
+      mouseY = -9999;
+    });
+  }
 
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -422,8 +436,13 @@ function initBackgroundCanvas() {
     particles.push(new Particle());
   }
 
-  function animate() {
+  function animate(timestamp) {
     if (!isRunning) return;
+
+    requestAnimationFrame(animate);
+
+    if (timestamp - lastFrameTime < frameInterval) return;
+    lastFrameTime = timestamp;
 
     ctx.clearRect(0, 0, width, height);
 
@@ -437,35 +456,33 @@ function initBackgroundCanvas() {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - dist / maxDistance)})`;
+          ctx.strokeStyle = `rgba(0, 240, 255, ${0.08 * (1 - dist / maxDistance)})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
       }
 
-      const mdx = particles[i].x - mouseX;
-      const mdy = particles[i].y - mouseY;
-      const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+      if (!isMobile && mouseX > 0) {
+        const mdx = particles[i].x - mouseX;
+        const mdy = particles[i].y - mouseY;
+        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
 
-      if (mdist < 150) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(mouseX, mouseY);
-        ctx.strokeStyle = `rgba(0, 240, 255, ${0.25 * (1 - mdist / 150)})`;
-        ctx.lineWidth = 0.75;
-        ctx.stroke();
+        if (mdist < 130) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouseX, mouseY);
+          ctx.strokeStyle = `rgba(0, 240, 255, ${0.2 * (1 - mdist / 130)})`;
+          ctx.lineWidth = 0.75;
+          ctx.stroke();
+        }
       }
+
+      particles[i].update();
+      particles[i].draw();
     }
-
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-
-    requestAnimationFrame(animate);
   }
 
-  animate();
+  requestAnimationFrame(animate);
 }
 
 /* ==============================================================================
