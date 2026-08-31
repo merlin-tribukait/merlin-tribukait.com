@@ -902,9 +902,22 @@ a:hover {
 }
 
 .pillar-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.6rem;
-  color: var(--accent-cyan);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.ui-svg-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.45));
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.pillar-card:hover .ui-svg-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.8));
 }
 
 .pillar-title {
