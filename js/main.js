@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAudioSynthesizer();
   initTerminal();
   initContactAndCopy();
-  initHudTelemetry();
 });
 
 /* ==============================================================================
@@ -117,7 +116,6 @@ function initAudioSynthesizer() {
     });
   }
 
-  // Attach hover sounds to buttons and cards
   document.querySelectorAll('.btn, .glass-card, .term-quick-btn').forEach(elem => {
     elem.addEventListener('mouseenter', () => window.playCyberSound('hover'));
     elem.addEventListener('click', () => window.playCyberSound('click'));
@@ -134,7 +132,6 @@ function initMouseSpotlight() {
     document.documentElement.style.setProperty('--mouse-x', `${x}px`);
     document.documentElement.style.setProperty('--mouse-y', `${y}px`);
 
-    // Update nearest glass cards for dynamic spotlight border
     document.querySelectorAll('.glass-card').forEach(card => {
       const rect = card.getBoundingClientRect();
       if (
@@ -154,7 +151,7 @@ function initMouseSpotlight() {
    3D TILT EFFECT ON CARDS
    ============================================================================== */
 function init3DCardTilt() {
-  if (window.innerWidth < 1024) return; // Desktop only for optimal touch performance
+  if (window.innerWidth < 1024) return;
 
   const cards = document.querySelectorAll('.glass-card');
   cards.forEach(card => {
@@ -284,7 +281,7 @@ function initTypingEffect() {
   const phrases = [
     'Full-Stack Systems Architect & Game Core Engineer',
     'Low-Level Protocol Reverse Engineer (541+ Opcodes)',
-    'Distributed Cloud & Zero-Downtime DevOps Specialist',
+    'Distributed Cloud & High-Availability Specialist',
     'C++17 MMORPG Daemons & High-Concurrency Networks',
     'Next-Gen Web Platforms & Real-Time Telemetry'
   ];
@@ -379,7 +376,6 @@ function initBackgroundCanvas() {
       this.x += this.vx;
       this.y += this.vy;
 
-      // Mouse repulsion force field
       const dx = this.x - mouseX;
       const dy = this.y - mouseY;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -411,7 +407,6 @@ function initBackgroundCanvas() {
 
     ctx.clearRect(0, 0, width, height);
 
-    // Connecting lines between particles
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -428,7 +423,6 @@ function initBackgroundCanvas() {
         }
       }
 
-      // Mouse interactive lightning connector
       const mdx = particles[i].x - mouseX;
       const mdy = particles[i].y - mouseY;
       const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
@@ -455,30 +449,7 @@ function initBackgroundCanvas() {
 }
 
 /* ==============================================================================
-   LIVE HUD TELEMETRY SIMULATOR
-   ============================================================================== */
-function initHudTelemetry() {
-  const latencyElem = document.getElementById('hudLatency');
-  const packetElem = document.getElementById('hudPackets');
-
-  if (!latencyElem && !packetElem) return;
-
-  let packets = 2841920;
-
-  setInterval(() => {
-    if (latencyElem) {
-      const ping = Math.floor(10 + Math.random() * 8);
-      latencyElem.textContent = `${ping}ms`;
-    }
-    if (packetElem) {
-      packets += Math.floor(12 + Math.random() * 25);
-      packetElem.textContent = packets.toLocaleString();
-    }
-  }, 2000);
-}
-
-/* ==============================================================================
-   INTERACTIVE LIVE CLI TERMINAL (WITH FX & EXPANDED COMMANDS)
+   INTERACTIVE LIVE CLI TERMINAL (PORTFOLIO & ARCHITECTURE CONSOLE)
    ============================================================================== */
 function initTerminal() {
   const terminalBody = document.getElementById('terminalBody');
@@ -502,47 +473,47 @@ function initTerminal() {
   const commands = {
     help: () => `
 \x1b[33m[AVAILABLE COMMANDS]\x1b[0m
-  - \x1b[36mabout\x1b[0m       : Engineering background & profile summary
-  - \x1b[36mnotes\x1b[0m       : Technical field notes & architecture insights
+  - \x1b[36mabout\x1b[0m       : Engineering background & developer profile summary
+  - \x1b[36mnotes\x1b[0m       : Technical field notes & protocol insights
   - \x1b[36mskills\x1b[0m      : Full technical stack & proficiency breakdown
   - \x1b[36mprojects\x1b[0m    : Summary of active systems (GAMES-REBORN, MU3, Docs)
   - \x1b[36mservices\x1b[0m    : What I can program, build, and consult on
   - \x1b[36mroadmap\x1b[0m     : Upcoming releases & future roadmap milestones
-  - \x1b[36mspecs\x1b[0m       : Live server telemetry & architecture specifications
-  - \x1b[36mscan\x1b[0m        : Execute real-time network and daemon port audit
+  - \x1b[36mspecs\x1b[0m       : Engineering & architecture specifications
+  - \x1b[36mscan\x1b[0m        : Audit active ecosystem software modules
   - \x1b[36mcrt\x1b[0m         : Toggle retro CRT monitor scanlines overlay
   - \x1b[36maudio\x1b[0m       : Toggle Web Audio synth sound effects
-  - \x1b[36mhack\x1b[0m        : Simulate cyber network traceroute
+  - \x1b[36mhack\x1b[0m        : Simulate protocol disassembly & compilation pipeline
   - \x1b[36mmatrix\x1b[0m      : Stream Matrix digital rain stream
   - \x1b[36mcontact\x1b[0m     : Direct communication channels & email
   - \x1b[36mclear\x1b[0m       : Clear terminal window
 `,
     about: () => `
 \x1b[32m[DEVELOPER IDENTITY]\x1b[0m
-  Name      : Merlin Felix Tribukait
-  Role      : Full-Stack Systems Architect & Game Core Engineer
-  Specialty : Low-Level Network Protocol Reverse Engineering & C++ MMORPG Cores
-  Location  : Frankfurt am Main / Remote
-  Status    : Open to Select Technical Architecture & Engineering Contracts
+  Name          : Merlin Felix Tribukait
+  Role          : Full-Stack Systems Architect & Game Core Engineer
+  Specialization: Low-Level Protocol Reverse Engineering & C++ MMORPG Cores
+  Location      : Frankfurt am Main, Germany / Remote
+  Status        : Open to Select Technical Architecture & Engineering Contracts
 
 \x1b[34m[CORE ETHOS]\x1b[0m
   "Engineered for speed, built on provable resilience, and zero-downtime high concurrency."
 `,
     notes: () => `
 \x1b[35m[ARCHITECTURAL FIELD NOTES]\x1b[0m
-  • Note 01 (Reverse Eng): 541 opcodes & 4,221 DTO schemas extracted via Wireshark + IL2CPP metadata.
-  • Note 02 (C++17 Core)  : Async epoll/socket loop with worker thread pools isolates DB I/O from 20ms tick.
-  • Note 03 (Nginx/DevOps): Dual-stack HTTP/2 & TLS 1.3 on ports 80/443 with Let's Encrypt ECDSA auto-renew.
-  • Note 04 (PM2 Cluster) : Micro-apps (portal, admin, mu3) reload with zero downtime via Node cluster mesh.
+  • Note 01 (Reverse Eng): 541 opcodes & 4,221 DTO schemas mapped via Wireshark + IL2CPP metadata.
+  • Note 02 (C++17 Core)  : Async epoll loop with worker thread pools isolates DB I/O from 20ms tick.
+  • Note 03 (Web Systems) : Modern reverse proxying, HTTP/2 multiplexing, and automated TLS 1.3 encryption.
+  • Note 04 (Clustering)  : Micro-apps (portal, admin, mu3) reload with zero downtime via process mesh.
   • Note 05 (Database)   : MariaDB 10.x parameterized connection pool eliminates SQL injection & lockups.
 `,
     skills: () => `
 \x1b[33m[CORE ARSENAL]\x1b[0m
   - Low-Level & Core   : C++17/20, TypeScript, Python 3.12+, SQL (MariaDB), Bash, C#
   - Protocol Engineering: Wireshark, Ghidra, IL2CPP, 541 Opcodes, 4,221 DTO Schemas
-  - Backend & Mesh      : Node.js, PM2 Zero-Downtime Cluster, MariaDB Pooling, Redis, WebSockets
+  - Backend & Mesh      : Node.js, Clustered Processes, MariaDB Pooling, Redis, WebSockets
   - Frontend & Web      : Next.js, React, Tailwind CSS, Primer Tokens, Real-Time GM UI
-  - DevOps & Infra      : Linux Kernel Tuning, Nginx Load Balancing, Let's Encrypt TLS 1.3
+  - DevOps & Cloud      : Linux Kernel Tuning, Load Balancing, Automated TLS 1.3
   - Mobile & Client     : Android SDK, Custom Launchers (Avalonia), SHA-256 Delta Patchers
 `,
     projects: () => `
@@ -571,17 +542,18 @@ function initTerminal() {
   - Q2 2027 : AI-Powered Real-Time Game Telemetry & Anti-Cheat Agent
 `,
     specs: () => `
-\x1b[34m[SYSTEM TELEMETRY SPECIFICATIONS]\x1b[0m
-  Host IP       : 85.215.227.241 (Frankfurt, EU)
-  Web Server    : Nginx 1.24.0 (Dual-Stack IPv4/IPv6, HTTP/2, TLS 1.3)
-  Active Ports  : 80 (HTTP), 443 (HTTPS), 8080, 8444, 3000, 3100, 3306, 8081, 8088
-  Database Engine: MariaDB 10.x with Parameterized Connection Pooling
-  Process Mesh  : PM2 v7.0.4 God Daemon + C++17 Asynchronous Game Daemons
-  TLS Encryption: Let's Encrypt ECDSA Automated Renewal (Valid)
+\x1b[34m[ENGINEERING & ARCHITECTURAL SPECIFICATIONS]\x1b[0m
+  Developer     : Merlin Felix Tribukait
+  Specialization: Low-Level Network Protocols & Distributed Game Cores
+  Core Languages: C++17/20, TypeScript, Python 3.12, SQL (MariaDB), Bash
+  Protocol Scope: 541 Reverse-Engineered Opcodes · 4,221 Binary DTO Schemas
+  System Focus  : Non-Blocking Event Loops, Thread Pools, Zero-Downtime Microservices
+  Security      : TLS 1.3, Encrypted Socket Framing, Clean-Room Emulation
+  Availability  : Open to Selected Technical Contracts & Consultations
 `,
     scan: () => {
       triggerScanAnimation();
-      return "Initiating multi-port daemon scan on 85.215.227.241...";
+      return "Auditing ecosystem architecture & active software modules...";
     },
     crt: () => {
       if (scanlines) {
@@ -599,7 +571,7 @@ function initTerminal() {
     },
     hack: () => {
       triggerHackAnimation();
-      return "Tracing network routing mesh...";
+      return "Executing full-stack architecture compilation pipeline...";
     },
     contact: () => `
 \x1b[32m[DIRECT CONTACT]\x1b[0m
@@ -714,54 +686,54 @@ Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems & F
   }
 
   function triggerScanAnimation() {
-    const ports = [
-      { port: 80, name: 'HTTP Reverse Proxy', status: 'OPEN [301 Redirect]' },
-      { port: 443, name: 'HTTPS TLS 1.3 HTTP/2', status: 'OPEN [ECDSA OK]' },
-      { port: 3000, name: 'Gitea / Web Hub', status: 'OPEN [Proxy Pass]' },
-      { port: 3100, name: 'GAMES-REBORN PM2', status: 'OPEN [Cluster Node]' },
-      { port: 3306, name: 'MariaDB Instance', status: 'PROTECTED [127.0.0.1]' },
-      { port: 4403, name: 'MU3 Auth Gateway', status: 'OPEN [Daemon Core]' },
-      { port: 5222, name: 'MU3 Game Server 01', status: 'OPEN [Asio epoll]' },
-      { port: 8088, name: 'MU3 Admin GM API', status: 'PROTECTED [Nginx Auth]' }
+    const modules = [
+      { name: 'GAMES-REBORN Multi-Realm Core', status: 'ACTIVE [High-Throughput Node.js]' },
+      { name: 'MU3-Server C++17 Daemon Engine', status: 'COMPILED [541 Opcodes / 85 Systems]' },
+      { name: 'Protocol Intel & DTO Explorer', status: 'MAPPED [4,221 Binary Schemas]' },
+      { name: 'OurNuts Client Manager & SDK', status: 'VERIFIED [Android Tooling Suite]' },
+      { name: 'Brand Design System v2.0', status: 'DEPLOYED [Vector SVG & Tokens]' },
+      { name: 'KEY-BITCHER Security Orchestrator', status: 'OPERATIONAL [Cryptographic CLI]' },
+      { name: 'MariaDB Parameterized Pool', status: 'OPTIMIZED [Sub-millisecond Queries]' },
+      { name: 'Universal Auth & OAuth2 IdP', status: 'SECURED [JWT Identity Provider]' }
     ];
 
     let idx = 0;
     const interval = setInterval(() => {
-      if (idx < ports.length) {
-        const p = ports[idx];
-        printOutput(`  \x1b[36m[PORT ${p.port}]\x1b[0m ${p.name.padEnd(24)} -> \x1b[32m${p.status}\x1b[0m`);
+      if (idx < modules.length) {
+        const m = modules[idx];
+        printOutput(`  \x1b[36m[MODULE ${String(idx + 1).padStart(2, '0')}]\x1b[0m ${m.name.padEnd(32)} -> \x1b[32m${m.status}\x1b[0m`);
         terminalBody.scrollTop = terminalBody.scrollHeight;
         if (window.playCyberSound) window.playCyberSound('key');
         idx++;
       } else {
         clearInterval(interval);
-        printOutput(`\x1b[32m✔ Port audit completed. All 8 active listeners healthy.\x1b[0m`);
+        printOutput(`\x1b[32m✔ Ecosystem audit completed. All 8 core systems operational.\x1b[0m`);
         terminalBody.scrollTop = terminalBody.scrollHeight;
       }
-    }, 120);
+    }, 110);
   }
 
   function triggerHackAnimation() {
-    const hops = [
-      'HOP 01: 127.0.0.1 (Local Gateway) - 0.2ms',
-      'HOP 02: 85.215.227.241 (Frankfurt Edge Core) - 1.1ms',
-      'HOP 03: 10.0.4.1 (PM2 Micro-App Cluster) - 0.4ms',
-      'HOP 04: 127.0.0.1:3306 (MariaDB Connection Pool) - 0.3ms',
-      'HOP 05: /bin/mu3_server (Asynchronous Game Loop) - 0.1ms'
+    const stages = [
+      'STAGE 01: Binary Protocol Packet Capture & Disassembly (Wireshark / Ghidra)',
+      'STAGE 02: DTO Schema Extraction & Struct Code Generation (C++ / TypeScript)',
+      'STAGE 03: Non-Blocking Asynchronous Game Loop & Socket Framing Engine',
+      'STAGE 04: Thread Pool & Parameterized Database Connection Pooling',
+      'STAGE 05: Real-Time WebSocket Telemetry Feed & Web Dashboard Interface'
     ];
     let idx = 0;
     const interval = setInterval(() => {
-      if (idx < hops.length) {
-        printOutput(`\x1b[33m⚡ ${hops[idx]}\x1b[0m`);
+      if (idx < stages.length) {
+        printOutput(`\x1b[33m⚡ ${stages[idx]}\x1b[0m`);
         terminalBody.scrollTop = terminalBody.scrollHeight;
         if (window.playCyberSound) window.playCyberSound('key');
         idx++;
       } else {
         clearInterval(interval);
-        printOutput(`\x1b[32m✔ Trace verified: Zero packet loss, 100% throughput integrity.\x1b[0m`);
+        printOutput(`\x1b[32m✔ Pipeline execution verified: Full-stack architecture validated.\x1b[0m`);
         terminalBody.scrollTop = terminalBody.scrollHeight;
       }
-    }, 150);
+    }, 140);
   }
 
   function triggerMatrixEffect() {

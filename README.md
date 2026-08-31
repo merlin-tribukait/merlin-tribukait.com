@@ -11,7 +11,7 @@ Live Website: **[https://merlin-tribukait.com/](https://merlin-tribukait.com/)**
 This repository powers the official developer portal at `https://merlin-tribukait.com/`. It showcases:
 
 - **Engineering Philosophy & Bio**: Deep focus on low-level systems programming, protocol reverse engineering, high-throughput C++17 MMORPG cores, and resilient full-stack web platforms.
-- **Technical Arsenal**: Comprehensive breakdown across C++17/20, TypeScript, Python, MariaDB, Linux kernel tuning, Nginx load balancing, and Android SDK tooling.
+- **Technical Arsenal**: Comprehensive breakdown across C++17/20, TypeScript, Python, MariaDB, Linux systems, Nginx load balancing, and Android SDK tooling.
 - **Production Ecosystem**:
   - **GAMES-REBORN**: Multi-Realm MMORPG Platform (`games-reborn.com`)
   - **MU3-Server**: Clean-room C++17 private game daemon core (541 opcodes, 4,221 DTO schemas, 85 systems)
@@ -21,15 +21,6 @@ This repository powers the official developer portal at `https://merlin-tribukai
 - **Capabilities & Services**: What Merlin can program, architect, and deliver.
 - **Future Roadmap**: Upcoming releases (Q4 2026 – Q2 2027).
 - **Interactive Live CLI Terminal**: Fully functional in-browser terminal emulator with command parsing and matrix effects.
-
----
-
-## 🚀 Deployment & Infrastructure
-
-- **Server IP**: `85.215.227.241` (Frankfurt, EU)
-- **Web Server**: Nginx 1.24.0 with HTTP/2 and dual-stack IPv4/IPv6
-- **SSL/TLS**: Let's Encrypt automated ECDSA certificates with TLS 1.3
-- **Document Root**: `/var/www/merlin-tribukait.com/`
 
 ---
 
