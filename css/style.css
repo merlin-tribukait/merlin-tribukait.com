@@ -28,8 +28,11 @@
   --border-glow: rgba(0, 240, 255, 0.3);
   --border-active: #00f0ff;
   
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace;
+  --font-display: 'Orbitron', 'Audiowide', sans-serif;
+  --font-tech: 'Oxanium', 'Rajdhani', sans-serif;
+  --font-body: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
   
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -60,7 +63,8 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  font-size: 17px;
   background-color: var(--bg-primary);
   color: var(--fg-primary);
   line-height: 1.65;
@@ -69,6 +73,23 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Alien / Space Futuristic Typography Hierarchy */
+h1, h2, h3, h4, .font-display,
+.pillar-title, .stack-title, .project-title, .service-title, .roadmap-title, .footer-col-title, .terminal-title {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+}
+
+.hud-item, .stat-label, .stack-tag, .project-tag, .service-number, .roadmap-node, .roadmap-tag, .term-quick-btn, .nav-link, .contact-detail-title {
+  font-family: var(--font-tech);
+  letter-spacing: 0.08em;
 }
 
 /* Background Gradients & Canvas */
@@ -195,37 +216,43 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: clamp(0.75rem, 2vw, 0.825rem);
+  font-family: var(--font-tech);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   color: var(--accent-cyan);
   background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  padding: 0.35rem 0.95rem;
   border-radius: var(--radius-full);
   margin-bottom: 0.85rem;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.18);
 }
 
 .section-title {
-  font-size: clamp(1.85rem, 5vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.5vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.25;
   margin-bottom: 0.85rem;
-  background: linear-gradient(135deg, #ffffff 30%, var(--fg-secondary) 100%);
+  background: linear-gradient(135deg, #ffffff 40%, #c4d8ff 80%, var(--accent-cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .section-subtitle {
-  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
+  font-family: var(--font-tech);
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-weight: 500;
   color: var(--fg-secondary);
   max-width: 680px;
   margin: 0 auto;
   line-height: 1.6;
+  letter-spacing: 0.03em;
 }
 
 /* Scroll Reveal Animations */
@@ -341,10 +368,11 @@ a:hover {
   justify-content: center;
   gap: 0.5rem;
   min-height: 42px;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.925rem;
-  font-weight: 600;
-  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -489,19 +517,23 @@ a:hover {
 }
 
 .brand-name {
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: #fff;
   line-height: 1.2;
   white-space: nowrap;
 }
 
 .brand-role {
-  font-size: 0.685rem;
-  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-family: var(--font-tech);
+  font-weight: 700;
   color: var(--accent-cyan);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -687,31 +719,34 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: clamp(0.725rem, 2vw, 0.85rem);
-  font-weight: 600;
+  font-family: var(--font-tech);
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.22em;
   color: var(--accent-cyan);
   background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  padding: 0.4rem 1rem;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  padding: 0.45rem 1.25rem;
   border-radius: var(--radius-full);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   backdrop-filter: blur(12px);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.2);
   max-width: 100%;
 }
 
 .hero-title {
-  font-size: clamp(2.25rem, 7.5vw, 4.2rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 6.5vw, 4.4rem);
   font-weight: 900;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   line-height: 1.1;
   margin-bottom: 1.2rem;
-  background: linear-gradient(135deg, #ffffff 20%, #d4e0ff 60%, var(--accent-cyan) 100%);
+  background: linear-gradient(135deg, #ffffff 30%, #d4e0ff 70%, var(--accent-cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 35px rgba(0, 240, 255, 0.35);
 }
 
 .hero-typing {
