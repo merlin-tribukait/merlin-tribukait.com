@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Merlin Tribukait · Full-Stack Systems Architect & Game Core Engineer</title>
-  <meta name="description" content="Official portfolio and engineering ecosystem of Merlin Felix Tribukait. Specializing in C++17 MMORPG Cores, Network Protocol Reverse Engineering, Distributed Microservices & DevOps.">
-  <meta name="keywords" content="Merlin Tribukait, Systems Architect, C++ Game Server, Reverse Engineering, MMORPG Daemon, MU Origin 3, GAMES-REBORN, Protocol Intel, Node.js, MariaDB">
+  <meta name="description" content="Official portfolio, architecture notes, and engineering ecosystem of Merlin Felix Tribukait. Specializing in C++17 MMORPG Cores, Network Protocol Reverse Engineering, Distributed Microservices & DevOps.">
+  <meta name="keywords" content="Merlin Tribukait, Systems Architect, C++ Game Server, Reverse Engineering, MMORPG Daemon, MU Origin 3, GAMES-REBORN, Protocol Intel, Node.js, MariaDB, Architecture Notes">
   <meta name="author" content="Merlin Felix Tribukait">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Merlin Tribukait · Full-Stack Systems Architect & Game Core Engineer">
-  <meta property="og:description" content="Explore the projects, protocol intelligence, low-level game daemons, and software engineering ecosystem built by Merlin Tribukait.">
+  <meta property="og:description" content="Explore the projects, protocol intelligence, engineering notes, low-level game daemons, and software ecosystem built by Merlin Tribukait.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://merlin-tribukait.com/">
   <meta property="og:image" content="https://merlin-tribukait.com/assets/img/banner.jpg">
@@ -51,9 +51,10 @@
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#stack" class="nav-link">Arsenal</a></li>
         <li><a href="#projects" class="nav-link">Ecosystem</a></li>
-        <li><a href="#services" class="nav-link">Services & Capabilities</a></li>
+        <li><a href="#notes" class="nav-link">Engineering Notes</a></li>
+        <li><a href="#services" class="nav-link">Capabilities</a></li>
         <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
-        <li><a href="#terminal" class="nav-link">Live Terminal</a></li>
+        <li><a href="#terminal" class="nav-link">CLI</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
@@ -92,6 +93,10 @@
           <a href="#projects" class="btn btn-primary">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
             Explore Projects
+          </a>
+          <a href="#notes" class="btn btn-secondary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            Field Notes
           </a>
           <a href="#services" class="btn btn-secondary">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -504,6 +509,78 @@
     </div>
   </section>
 
+  <!-- Engineering Notes & Architectural Insights Section -->
+  <section class="section" id="notes">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Architecture & Engineering Notes</div>
+        <h2 class="section-title">Technical Field Notes & Deep-Dives</h2>
+        <p class="section-subtitle">Architectural design patterns, protocol reverse-engineering findings, and high-performance server notes.</p>
+      </div>
+
+      <div class="stack-grid">
+        <!-- Note Card 1 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">🔬</div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">NOTE #01 · REVERSE ENG</div>
+              <div class="stack-title">541 Opcodes & 4,221 DTO Schemas</div>
+            </div>
+          </div>
+          <p class="stack-desc" style="margin-bottom: 1rem;">
+            When reverse engineering the MU Origin 3 binary protocol, packet framing uses a 2-byte header delimiter followed by a 2-byte opcode identifier and length-prefixed payload. Using IL2CPP metadata dumps combined with live Wireshark dissection, 541 distinct protocol opcodes and 4,221 nested DTO structures were mapped into clean-room C++ and TypeScript schemas.
+          </p>
+          <div class="stack-tags">
+            <span class="stack-tag">Opcode Disassembly</span>
+            <span class="stack-tag">IL2CPP Metadata</span>
+            <span class="stack-tag">Packet Serialization</span>
+          </div>
+        </div>
+
+        <!-- Note Card 2 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">⚡</div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">NOTE #02 · GAME CORE</div>
+              <div class="stack-title">C++17 Non-Blocking Daemon Architecture</div>
+            </div>
+          </div>
+          <p class="stack-desc" style="margin-bottom: 1rem;">
+            The `mu3-server` daemon core is architected around an asynchronous event loop with worker thread pools for compute-heavy combat calculations and MariaDB connection pooling. This decoupled architecture isolates database I/O latency from the 20ms game world tick loop, guaranteeing zero tick stutter under high player density.
+          </p>
+          <div class="stack-tags">
+            <span class="stack-tag">C++17 Daemon</span>
+            <span class="stack-tag">Worker Pools</span>
+            <span class="stack-tag">MariaDB Pool</span>
+            <span class="stack-tag">Tick Loop</span>
+          </div>
+        </div>
+
+        <!-- Note Card 3 -->
+        <div class="glass-card stack-card">
+          <div class="stack-header">
+            <div class="stack-icon-wrapper">🌐</div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">NOTE #03 · WEB & DEVOPS</div>
+              <div class="stack-title">Dual-Stack Nginx & TLS 1.3 Routing</div>
+            </div>
+          </div>
+          <p class="stack-desc" style="margin-bottom: 1rem;">
+            All domains (`merlin-tribukait.com`, `docs.merlin-tribukait.com`, `games-reborn.com`) are configured with dual-stack IPv4/IPv6 Nginx reverse proxying on standard ports 80 and 443 with HTTP/2 and Let's Encrypt ECDSA certificates. Automated ACME challenge verification runs seamlessly with zero downtime.
+          </p>
+          <div class="stack-tags">
+            <span class="stack-tag">Nginx HTTP/2</span>
+            <span class="stack-tag">TLS 1.3 ECDSA</span>
+            <span class="stack-tag">Dual-Stack</span>
+            <span class="stack-tag">Certbot Webroot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Possibilities & What I Can Program (Services) Section -->
   <section class="section" id="services">
     <div class="container">
@@ -749,7 +826,7 @@
       <div class="section-header">
         <div class="section-tag">Interactive CLI</div>
         <h2 class="section-title">Live Systems Console</h2>
-        <p class="section-subtitle">Run simulated terminal commands to inspect server specs, project data, and engineering credentials.</p>
+        <p class="section-subtitle">Run simulated terminal commands to inspect server specs, project data, engineering field notes, and credentials.</p>
       </div>
 
       <div class="terminal-wrapper">
@@ -763,6 +840,7 @@
           <div class="terminal-actions">
             <button class="term-quick-btn" data-cmd="help">help</button>
             <button class="term-quick-btn" data-cmd="about">about</button>
+            <button class="term-quick-btn" data-cmd="notes">notes</button>
             <button class="term-quick-btn" data-cmd="skills">skills</button>
             <button class="term-quick-btn" data-cmd="projects">projects</button>
             <button class="term-quick-btn" data-cmd="specs">specs</button>
@@ -776,7 +854,7 @@
         <div style="background: #11111a; padding: 0.75rem 1.5rem; border-top: 1px solid var(--border-subtle);">
           <div class="term-input-row">
             <span class="term-prompt">guest@merlin-tribukait:~$</span>
-            <input type="text" class="term-input" id="termInput" placeholder="Type a command (e.g. 'help', 'specs', 'services', 'contact')..." autocomplete="off" spellcheck="false">
+            <input type="text" class="term-input" id="termInput" placeholder="Type a command (e.g. 'help', 'notes', 'specs', 'services', 'contact')..." autocomplete="off" spellcheck="false">
           </div>
         </div>
       </div>
@@ -902,6 +980,7 @@
             <li><a href="#about" class="footer-link">About Merlin</a></li>
             <li><a href="#stack" class="footer-link">Technical Stack</a></li>
             <li><a href="#projects" class="footer-link">Projects & Systems</a></li>
+            <li><a href="#notes" class="footer-link">Architecture Notes</a></li>
             <li><a href="#services" class="footer-link">Services & Capabilities</a></li>
             <li><a href="#roadmap" class="footer-link">Future Roadmap</a></li>
             <li><a href="#terminal" class="footer-link">Interactive Terminal</a></li>

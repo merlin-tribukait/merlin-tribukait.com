@@ -223,6 +223,7 @@ function initTerminal() {
     help: () => `
 Available Commands:
   - \x1b[36mabout\x1b[0m       : Engineering background & profile summary
+  - \x1b[36mnotes\x1b[0m       : Technical field notes & architecture insights
   - \x1b[36mskills\x1b[0m      : Full technical stack & proficiency breakdown
   - \x1b[36mprojects\x1b[0m    : Summary of active systems (GAMES-REBORN, MU3, Docs)
   - \x1b[36mservices\x1b[0m    : What I can program, build, and consult on
@@ -244,6 +245,14 @@ Available Commands:
 
 \x1b[34m[CORE ETHOS]\x1b[0m
   "Engineered for speed, built on provable resilience, and zero-downtime high concurrency."
+`,
+    notes: () => `
+\x1b[35m[ARCHITECTURAL FIELD NOTES]\x1b[0m
+  • Note 01 (Reverse Eng): 541 opcodes & 4,221 DTO schemas extracted via Wireshark + IL2CPP metadata.
+  • Note 02 (C++17 Core)  : Async epoll/socket loop with worker thread pools isolates DB I/O from 20ms tick.
+  • Note 03 (Nginx/DevOps): Dual-stack HTTP/2 & TLS 1.3 on ports 80/443 with Let's Encrypt ECDSA auto-renew.
+  • Note 04 (PM2 Cluster) : Micro-apps (portal, admin, mu3) reload with zero downtime via Node cluster mesh.
+  • Note 05 (Database)   : MariaDB 10.x parameterized connection pool eliminates SQL injection & lockups.
 `,
     skills: () => `
 \x1b[33m[CORE ARSENAL]\x1b[0m
@@ -311,7 +320,7 @@ Available Commands:
   // Run initial welcome banner
   printOutput(`
 ${ASCII_BANNER}
-Type \x1b[36m'help'\x1b[0m or click quick action buttons above to inspect systems.
+Type \x1b[36m'help'\x1b[0m or click quick action buttons above to inspect systems & notes.
 `);
 
   termInput.addEventListener('keydown', (e) => {
