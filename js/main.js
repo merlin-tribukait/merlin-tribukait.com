@@ -1,6 +1,6 @@
 /**
  * MERLIN TRIBUKAIT — PORTFOLIO & ECOSYSTEM INTERACTIVE SCRIPT
- * Cyber-Glass High Performance JS Engine
+ * Cyber-Glass High Performance JS Engine · Mobile & Touch Optimized
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==============================================================================
-   NAVBAR & SCROLL
+   NAVBAR & MOBILE DRAWER
    ============================================================================== */
 function initNavbar() {
   const navbar = document.querySelector('.navbar');
@@ -20,34 +20,56 @@ function initNavbar() {
   const navLinks = document.getElementById('navLinks');
   const links = document.querySelectorAll('.nav-link');
 
-  // Scroll detection for navbar background
+  // Create mobile overlay if not present
+  let overlay = document.querySelector('.mobile-nav-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'mobile-nav-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  // Scroll detection with passive listener
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
+    if (window.scrollY > 30) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
     updateActiveNav();
-  });
+  }, { passive: true });
 
-  // Mobile menu toggle
+  function toggleMenu(open) {
+    const isOpen = open !== undefined ? open : !navLinks.classList.contains('open');
+    if (isOpen) {
+      navLinks.classList.add('open');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      navLinks.classList.remove('open');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
   if (mobileBtn && navLinks) {
-    mobileBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+    mobileBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
     });
   }
 
-  // Close mobile menu on click
+  overlay.addEventListener('click', () => toggleMenu(false));
+
   links.forEach(link => {
     link.addEventListener('click', () => {
-      if (navLinks) navLinks.classList.remove('open');
+      toggleMenu(false);
     });
   });
 
-  // Active section tracker
+  // Track active navigation link on scroll
   function updateActiveNav() {
     const sections = document.querySelectorAll('section[id]');
-    const scrollPos = window.scrollY + 200;
+    const scrollPos = window.scrollY + 180;
 
     sections.forEach(sec => {
       const top = sec.offsetTop;
@@ -92,16 +114,15 @@ function initTypingEffect() {
     if (isDeleting) {
       typingElem.textContent = currentPhrase.substring(0, charIdx - 1);
       charIdx--;
-      typingSpeed = 30;
+      typingSpeed = 28;
     } else {
       typingElem.textContent = currentPhrase.substring(0, charIdx + 1);
       charIdx++;
-      typingSpeed = 65;
+      typingSpeed = 60;
     }
 
     if (!isDeleting && charIdx === currentPhrase.length) {
-      // Pause at full word
-      typingSpeed = 2200;
+      typingSpeed = 2400;
       isDeleting = true;
     } else if (isDeleting && charIdx === 0) {
       isDeleting = false;
@@ -116,7 +137,7 @@ function initTypingEffect() {
 }
 
 /* ==============================================================================
-   PARTICLE NETWORK CANVAS
+   PERFORMANCE-TUNED PARTICLE NETWORK CANVAS
    ============================================================================== */
 function initBackgroundCanvas() {
   const canvas = document.getElementById('bg-canvas');
@@ -125,25 +146,36 @@ function initBackgroundCanvas() {
   const ctx = canvas.getContext('2d');
   let width, height;
   let particles = [];
-  const particleCount = 45;
+  let isRunning = true;
+
+  // Responsive particle density
+  const isMobile = window.innerWidth < 768;
+  const particleCount = isMobile ? 18 : 42;
+  const maxDistance = isMobile ? 100 : 140;
 
   function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   }
 
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resize, { passive: true });
   resize();
+
+  // Pause rendering when page is not visible to save mobile battery
+  document.addEventListener('visibilitychange', () => {
+    isRunning = !document.hidden;
+    if (isRunning) animate();
+  });
 
   class Particle {
     constructor() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
+      this.vx = (Math.random() - 0.5) * (isMobile ? 0.25 : 0.4);
+      this.vy = (Math.random() - 0.5) * (isMobile ? 0.25 : 0.4);
       this.radius = Math.random() * 1.5 + 0.8;
       this.color = Math.random() > 0.5 ? 'rgba(0, 240, 255,' : 'rgba(157, 78, 221,';
-      this.alpha = Math.random() * 0.4 + 0.15;
+      this.alpha = Math.random() * 0.35 + 0.12;
     }
 
     update() {
@@ -167,21 +199,22 @@ function initBackgroundCanvas() {
   }
 
   function animate() {
+    if (!isRunning) return;
+
     ctx.clearRect(0, 0, width, height);
 
-    // Draw connecting lines
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 140) {
+        if (dist < maxDistance) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0, 240, 255, ${0.12 * (1 - dist / 140)})`;
-          ctx.lineWidth = 0.6;
+          ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - dist / maxDistance)})`;
+          ctx.lineWidth = 0.5;
           ctx.stroke();
         }
       }
@@ -199,7 +232,7 @@ function initBackgroundCanvas() {
 }
 
 /* ==============================================================================
-   INTERACTIVE LIVE CLI TERMINAL
+   INTERACTIVE LIVE CLI TERMINAL (MOBILE & TOUCH FRIENDLY)
    ============================================================================== */
 function initTerminal() {
   const terminalBody = document.getElementById('terminalBody');
@@ -317,38 +350,40 @@ Available Commands:
     }
   };
 
-  // Run initial welcome banner
   printOutput(`
 ${ASCII_BANNER}
-Type \x1b[36m'help'\x1b[0m or click quick action buttons above to inspect systems & notes.
+Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems.
 `);
+
+  function executeCommand(inputStr) {
+    const rawInput = inputStr.trim();
+    if (!rawInput) return;
+
+    history.push(rawInput);
+    historyIdx = history.length;
+
+    printLine(`guest@merlin-tribukait:~$ ${rawInput}`);
+
+    const parts = rawInput.split(' ');
+    const cmd = parts[0].toLowerCase();
+    const args = parts.slice(1);
+
+    if (cmd in commands) {
+      const res = commands[cmd](args);
+      if (res) printOutput(res);
+    } else if (cmd === 'echo') {
+      printOutput(args.join(' '));
+    } else {
+      printOutput(`Command not found: \x1b[31m${cmd}\x1b[0m. Type \x1b[36m'help'\x1b[0m for list.`);
+    }
+
+    terminalBody.scrollTop = terminalBody.scrollHeight;
+  }
 
   termInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      const rawInput = termInput.value.trim();
+      executeCommand(termInput.value);
       termInput.value = '';
-
-      if (!rawInput) return;
-
-      history.push(rawInput);
-      historyIdx = history.length;
-
-      printLine(`guest@merlin-tribukait:~$ ${rawInput}`);
-
-      const parts = rawInput.split(' ');
-      const cmd = parts[0].toLowerCase();
-      const args = parts.slice(1);
-
-      if (cmd in commands) {
-        const res = commands[cmd](args);
-        if (res) printOutput(res);
-      } else if (cmd === 'echo') {
-        printOutput(args.join(' '));
-      } else {
-        printOutput(`Command not found: \x1b[31m${cmd}\x1b[0m. Type \x1b[36m'help'\x1b[0m for list.`);
-      }
-
-      terminalBody.scrollTop = terminalBody.scrollHeight;
     } else if (e.key === 'ArrowUp') {
       if (historyIdx > 0) {
         historyIdx--;
@@ -368,13 +403,11 @@ Type \x1b[36m'help'\x1b[0m or click quick action buttons above to inspect system
   });
 
   quickBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const cmd = btn.getAttribute('data-cmd');
       if (cmd && cmd in commands) {
-        printLine(`guest@merlin-tribukait:~$ ${cmd}`);
-        const res = commands[cmd]();
-        if (res) printOutput(res);
-        terminalBody.scrollTop = terminalBody.scrollHeight;
+        executeCommand(cmd);
       }
     });
   });
@@ -409,14 +442,14 @@ Type \x1b[36m'help'\x1b[0m or click quick action buttons above to inspect system
     let count = 0;
     const interval = setInterval(() => {
       let line = '';
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 32; i++) {
         line += String.fromCharCode(33 + Math.floor(Math.random() * 90)) + ' ';
       }
       printOutput(`<span style="color:#00df72; opacity:${0.4 + Math.random()*0.6}">${line}</span>`);
       terminalBody.scrollTop = terminalBody.scrollHeight;
       count++;
-      if (count > 10) clearInterval(interval);
-    }, 100);
+      if (count > 8) clearInterval(interval);
+    }, 90);
   }
 }
 
@@ -446,7 +479,6 @@ function initContactAndCopy() {
       const subject = document.getElementById('formSubject').value;
       const message = document.getElementById('formMessage').value;
 
-      // Construct mailto link
       const mailtoUrl = `mailto:merlin_felix_@hotmail.com?subject=${encodeURIComponent(subject + ' [via merlin-tribukait.com from ' + name + ']')}&body=${encodeURIComponent(message + '\n\nSender: ' + name + ' (' + email + ')')}`;
       
       showToast('Opening email client for Merlin Tribukait...');
@@ -473,5 +505,5 @@ function showToast(msg) {
     toast.style.transform = 'translateY(10px)';
     toast.style.transition = 'all 0.3s ease';
     setTimeout(() => toast.remove(), 300);
-  }, 3500);
+  }, 3200);
 }
