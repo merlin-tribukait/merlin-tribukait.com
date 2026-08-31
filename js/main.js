@@ -153,6 +153,26 @@ function initMouseSpotlight() {
 function init3DCardTilt() {
   if (window.innerWidth < 1024) return;
 
+  const heroBadge = document.querySelector('.hero-crest-badge');
+  if (heroBadge) {
+    heroBadge.addEventListener('mousemove', (e) => {
+      const rect = heroBadge.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -14;
+      const rotateY = ((x - centerX) / centerX) * 14;
+      heroBadge.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1) translateY(-8px)`;
+      heroBadge.style.animationPlayState = 'paused';
+    });
+
+    heroBadge.addEventListener('mouseleave', () => {
+      heroBadge.style.transform = '';
+      heroBadge.style.animationPlayState = 'running';
+    });
+  }
+
   const cards = document.querySelectorAll('.glass-card');
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
