@@ -1,6 +1,6 @@
 # merlin-tribukait.com · Official Portfolio & Developer Identity
 
-> Production developer portfolio, systems showcase, and technical capabilities platform for **Merlin Felix Tribukait** — Full-Stack Systems Architect & Game Core Engineer.
+> Production developer portfolio, systems showcase, and technical capabilities platform for **Merlin Tribukait** — Full-Stack Systems Architect & Game Core Engineer.
 
 Live Website: **[https://merlin-tribukait.com/](https://merlin-tribukait.com/)**
 
@@ -32,4 +32,4 @@ This repository powers the official developer portal at `https://merlin-tribukai
 
 ---
 
-© 2026 Merlin Felix Tribukait. All rights reserved.
+© 2026 Merlin Tribukait. All rights reserved.

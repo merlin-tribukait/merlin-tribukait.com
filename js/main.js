@@ -490,7 +490,7 @@ function initTerminal() {
 `,
     about: () => `
 \x1b[32m[DEVELOPER IDENTITY]\x1b[0m
-  Name          : Merlin Felix Tribukait
+  Name          : Merlin Tribukait
   Role          : Full-Stack Systems Architect & Game Core Engineer
   Specialization: Low-Level Protocol Reverse Engineering & C++ MMORPG Cores
   Location      : Frankfurt am Main, Germany / Remote
@@ -543,7 +543,7 @@ function initTerminal() {
 `,
     specs: () => `
 \x1b[34m[ENGINEERING & ARCHITECTURAL SPECIFICATIONS]\x1b[0m
-  Developer     : Merlin Felix Tribukait
+  Developer     : Merlin Tribukait
   Specialization: Low-Level Network Protocols & Distributed Game Cores
   Core Languages: C++17/20, TypeScript, Python 3.12, SQL (MariaDB), Bash
   Protocol Scope: 541 Reverse-Engineered Opcodes · 4,221 Binary DTO Schemas

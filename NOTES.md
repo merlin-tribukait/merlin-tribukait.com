@@ -55,4 +55,4 @@ git push origin main
 
 ---
 
-© 2026 Merlin Felix Tribukait. All rights reserved.
+© 2026 Merlin Tribukait. All rights reserved.
