@@ -1,15 +1,204 @@
 /**
  * MERLIN TRIBUKAIT — PORTFOLIO & ECOSYSTEM INTERACTIVE SCRIPT
- * Cyber-Glass High Performance JS Engine · Mobile & Touch Optimized
+ * Cyber-Glass Engine · 3D Parallax · Particle Physics · Web Audio FX · CRT Scanlines
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initTypingEffect();
+  initMouseSpotlight();
   initBackgroundCanvas();
+  init3DCardTilt();
+  initScrollReveal();
+  initAudioSynthesizer();
   initTerminal();
   initContactAndCopy();
+  initHudTelemetry();
 });
+
+/* ==============================================================================
+   WEB AUDIO API CYBER SYNTHESIZER (OPTIONAL SOUND FX)
+   ============================================================================== */
+let audioCtx = null;
+let soundEnabled = false;
+
+function initAudioSynthesizer() {
+  const audioBtn = document.getElementById('audioFxToggle');
+  const savedState = localStorage.getItem('mt_sound_fx');
+  
+  if (savedState === 'enabled') {
+    soundEnabled = true;
+    if (audioBtn) audioBtn.classList.add('active');
+  }
+
+  function getAudioContext() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) audioCtx = new AudioContext();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  window.playCyberSound = function(type) {
+    if (!soundEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === 'click') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(440, now + 0.05);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } else if (type === 'hover') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(520, now);
+        osc.frequency.linearRampToValueAtTime(660, now + 0.04);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.04);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } else if (type === 'key') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1200 + Math.random() * 300, now);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.03);
+        osc.start(now);
+        osc.stop(now + 0.03);
+      } else if (type === 'success') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.setValueAtTime(880, now + 0.08); // A5
+        osc.frequency.setValueAtTime(1174.66, now + 0.16); // D6
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (type === 'powerup') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.25);
+        gain.gain.setValueAtTime(0.07, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
+    } catch (e) {
+      // Ignore audio errors
+    }
+  };
+
+  if (audioBtn) {
+    audioBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('mt_sound_fx', soundEnabled ? 'enabled' : 'disabled');
+      audioBtn.classList.toggle('active', soundEnabled);
+      
+      if (soundEnabled) {
+        getAudioContext();
+        window.playCyberSound('powerup');
+        showToast('Cyber Audio FX Enabled');
+      } else {
+        showToast('Audio Muted');
+      }
+    });
+  }
+
+  // Attach hover sounds to buttons and cards
+  document.querySelectorAll('.btn, .glass-card, .term-quick-btn').forEach(elem => {
+    elem.addEventListener('mouseenter', () => window.playCyberSound('hover'));
+    elem.addEventListener('click', () => window.playCyberSound('click'));
+  });
+}
+
+/* ==============================================================================
+   MOUSE SPOTLIGHT & PARALLAX TRACKER
+   ============================================================================== */
+function initMouseSpotlight() {
+  window.addEventListener('mousemove', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    document.documentElement.style.setProperty('--mouse-x', `${x}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${y}px`);
+
+    // Update nearest glass cards for dynamic spotlight border
+    document.querySelectorAll('.glass-card').forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if (
+        x >= rect.left - 100 && x <= rect.right + 100 &&
+        y >= rect.top - 100 && y <= rect.bottom + 100
+      ) {
+        const cardX = ((x - rect.left) / rect.width) * 100;
+        const cardY = ((y - rect.top) / rect.height) * 100;
+        card.style.setProperty('--card-mouse-x', `${cardX}%`);
+        card.style.setProperty('--card-mouse-y', `${cardY}%`);
+      }
+    });
+  }, { passive: true });
+}
+
+/* ==============================================================================
+   3D TILT EFFECT ON CARDS
+   ============================================================================== */
+function init3DCardTilt() {
+  if (window.innerWidth < 1024) return; // Desktop only for optimal touch performance
+
+  const cards = document.querySelectorAll('.glass-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  });
+}
+
+/* ==============================================================================
+   SCROLL-DRIVEN REVEAL ANIMATIONS
+   ============================================================================== */
+function initScrollReveal() {
+  const elements = document.querySelectorAll('.section-header, .glass-card, .roadmap-item');
+  elements.forEach(el => el.classList.add('reveal-on-scroll'));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  elements.forEach(el => observer.observe(el));
+}
 
 /* ==============================================================================
    NAVBAR & MOBILE DRAWER
@@ -20,7 +209,6 @@ function initNavbar() {
   const navLinks = document.getElementById('navLinks');
   const links = document.querySelectorAll('.nav-link');
 
-  // Create mobile overlay if not present
   let overlay = document.querySelector('.mobile-nav-overlay');
   if (!overlay) {
     overlay = document.createElement('div');
@@ -28,7 +216,6 @@ function initNavbar() {
     document.body.appendChild(overlay);
   }
 
-  // Scroll detection with passive listener
   window.addEventListener('scroll', () => {
     if (window.scrollY > 30) {
       navbar.classList.add('scrolled');
@@ -66,7 +253,6 @@ function initNavbar() {
     });
   });
 
-  // Track active navigation link on scroll
   function updateActiveNav() {
     const sections = document.querySelectorAll('section[id]');
     const scrollPos = window.scrollY + 180;
@@ -137,7 +323,7 @@ function initTypingEffect() {
 }
 
 /* ==============================================================================
-   PERFORMANCE-TUNED PARTICLE NETWORK CANVAS
+   INTERACTIVE PARTICLE CANVAS WITH CURSOR LIGHTNING ARCS
    ============================================================================== */
 function initBackgroundCanvas() {
   const canvas = document.getElementById('bg-canvas');
@@ -148,10 +334,22 @@ function initBackgroundCanvas() {
   let particles = [];
   let isRunning = true;
 
-  // Responsive particle density
   const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 18 : 42;
+  const particleCount = isMobile ? 18 : 46;
   const maxDistance = isMobile ? 100 : 140;
+
+  let mouseX = -9999;
+  let mouseY = -9999;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }, { passive: true });
+
+  window.addEventListener('mouseleave', () => {
+    mouseX = -9999;
+    mouseY = -9999;
+  });
 
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -161,7 +359,6 @@ function initBackgroundCanvas() {
   window.addEventListener('resize', resize, { passive: true });
   resize();
 
-  // Pause rendering when page is not visible to save mobile battery
   document.addEventListener('visibilitychange', () => {
     isRunning = !document.hidden;
     if (isRunning) animate();
@@ -171,16 +368,27 @@ function initBackgroundCanvas() {
     constructor() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * (isMobile ? 0.25 : 0.4);
-      this.vy = (Math.random() - 0.5) * (isMobile ? 0.25 : 0.4);
-      this.radius = Math.random() * 1.5 + 0.8;
-      this.color = Math.random() > 0.5 ? 'rgba(0, 240, 255,' : 'rgba(157, 78, 221,';
-      this.alpha = Math.random() * 0.35 + 0.12;
+      this.vx = (Math.random() - 0.5) * (isMobile ? 0.25 : 0.45);
+      this.vy = (Math.random() - 0.5) * (isMobile ? 0.25 : 0.45);
+      this.radius = Math.random() * 1.6 + 0.8;
+      this.color = Math.random() > 0.4 ? 'rgba(0, 240, 255,' : 'rgba(157, 78, 221,';
+      this.alpha = Math.random() * 0.35 + 0.15;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
+
+      // Mouse repulsion force field
+      const dx = this.x - mouseX;
+      const dy = this.y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120 && dist > 0) {
+        const force = (120 - dist) / 120;
+        this.x += (dx / dist) * force * 1.5;
+        this.y += (dy / dist) * force * 1.5;
+      }
 
       if (this.x < 0 || this.x > width) this.vx *= -1;
       if (this.y < 0 || this.y > height) this.vy *= -1;
@@ -203,6 +411,7 @@ function initBackgroundCanvas() {
 
     ctx.clearRect(0, 0, width, height);
 
+    // Connecting lines between particles
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -218,6 +427,20 @@ function initBackgroundCanvas() {
           ctx.stroke();
         }
       }
+
+      // Mouse interactive lightning connector
+      const mdx = particles[i].x - mouseX;
+      const mdy = particles[i].y - mouseY;
+      const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+      if (mdist < 150) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(mouseX, mouseY);
+        ctx.strokeStyle = `rgba(0, 240, 255, ${0.25 * (1 - mdist / 150)})`;
+        ctx.lineWidth = 0.75;
+        ctx.stroke();
+      }
     }
 
     particles.forEach(p => {
@@ -232,12 +455,36 @@ function initBackgroundCanvas() {
 }
 
 /* ==============================================================================
-   INTERACTIVE LIVE CLI TERMINAL (MOBILE & TOUCH FRIENDLY)
+   LIVE HUD TELEMETRY SIMULATOR
+   ============================================================================== */
+function initHudTelemetry() {
+  const latencyElem = document.getElementById('hudLatency');
+  const packetElem = document.getElementById('hudPackets');
+
+  if (!latencyElem && !packetElem) return;
+
+  let packets = 2841920;
+
+  setInterval(() => {
+    if (latencyElem) {
+      const ping = Math.floor(10 + Math.random() * 8);
+      latencyElem.textContent = `${ping}ms`;
+    }
+    if (packetElem) {
+      packets += Math.floor(12 + Math.random() * 25);
+      packetElem.textContent = packets.toLocaleString();
+    }
+  }, 2000);
+}
+
+/* ==============================================================================
+   INTERACTIVE LIVE CLI TERMINAL (WITH FX & EXPANDED COMMANDS)
    ============================================================================== */
 function initTerminal() {
   const terminalBody = document.getElementById('terminalBody');
   const termInput = document.getElementById('termInput');
   const quickBtns = document.querySelectorAll('.term-quick-btn');
+  const scanlines = document.querySelector('.scanlines');
 
   if (!terminalBody || !termInput) return;
 
@@ -254,19 +501,21 @@ function initTerminal() {
 
   const commands = {
     help: () => `
-Available Commands:
+\x1b[33m[AVAILABLE COMMANDS]\x1b[0m
   - \x1b[36mabout\x1b[0m       : Engineering background & profile summary
   - \x1b[36mnotes\x1b[0m       : Technical field notes & architecture insights
   - \x1b[36mskills\x1b[0m      : Full technical stack & proficiency breakdown
   - \x1b[36mprojects\x1b[0m    : Summary of active systems (GAMES-REBORN, MU3, Docs)
   - \x1b[36mservices\x1b[0m    : What I can program, build, and consult on
-  - \x1b[36mroadmap\x1b[0m     : Upcoming releases & upcoming milestones
+  - \x1b[36mroadmap\x1b[0m     : Upcoming releases & future roadmap milestones
   - \x1b[36mspecs\x1b[0m       : Live server telemetry & architecture specifications
+  - \x1b[36mscan\x1b[0m        : Execute real-time network and daemon port audit
+  - \x1b[36mcrt\x1b[0m         : Toggle retro CRT monitor scanlines overlay
+  - \x1b[36maudio\x1b[0m       : Toggle Web Audio synth sound effects
+  - \x1b[36mhack\x1b[0m        : Simulate cyber network traceroute
+  - \x1b[36mmatrix\x1b[0m      : Stream Matrix digital rain stream
   - \x1b[36mcontact\x1b[0m     : Direct communication channels & email
-  - \x1b[36mbanner\x1b[0m      : Display ASCII developer banner
-  - \x1b[36mmatrix\x1b[0m      : Activate Matrix cyber stream
   - \x1b[36mclear\x1b[0m       : Clear terminal window
-  - \x1b[36mdate\x1b[0m        : Show current UTC date and server timestamp
 `,
     about: () => `
 \x1b[32m[DEVELOPER IDENTITY]\x1b[0m
@@ -330,6 +579,28 @@ Available Commands:
   Process Mesh  : PM2 v7.0.4 God Daemon + C++17 Asynchronous Game Daemons
   TLS Encryption: Let's Encrypt ECDSA Automated Renewal (Valid)
 `,
+    scan: () => {
+      triggerScanAnimation();
+      return "Initiating multi-port daemon scan on 85.215.227.241...";
+    },
+    crt: () => {
+      if (scanlines) {
+        scanlines.classList.toggle('active');
+        const isActive = scanlines.classList.contains('active');
+        showToast(isActive ? 'CRT Scanlines Enabled' : 'CRT Scanlines Disabled');
+        return `CRT Scanlines: ${isActive ? '\x1b[32m[ENABLED]\x1b[0m' : '\x1b[31m[DISABLED]\x1b[0m'}`;
+      }
+      return 'CRT overlay element unavailable.';
+    },
+    audio: () => {
+      const audioBtn = document.getElementById('audioFxToggle');
+      if (audioBtn) audioBtn.click();
+      return `Audio FX: ${soundEnabled ? '\x1b[32m[ENABLED]\x1b[0m' : '\x1b[31m[MUTED]\x1b[0m'}`;
+    },
+    hack: () => {
+      triggerHackAnimation();
+      return "Tracing network routing mesh...";
+    },
     contact: () => `
 \x1b[32m[DIRECT CONTACT]\x1b[0m
   Email   : merlin_felix_@hotmail.com
@@ -341,9 +612,9 @@ Available Commands:
     date: () => new Date().toUTCString(),
     matrix: () => {
       triggerMatrixEffect();
-      return "Initializing Matrix digital stream...";
+      return "Streaming digital Matrix torrent...";
     },
-    sudo: () => "Permission denied: you are already running as superuser in guest sandbox mode.",
+    sudo: () => "Permission granted: you have full root privileges on this guest session.",
     clear: () => {
       terminalBody.innerHTML = '';
       return '';
@@ -352,7 +623,7 @@ Available Commands:
 
   printOutput(`
 ${ASCII_BANNER}
-Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems.
+Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems & FX.
 `);
 
   function executeCommand(inputStr) {
@@ -363,6 +634,7 @@ Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems.
     historyIdx = history.length;
 
     printLine(`guest@merlin-tribukait:~$ ${rawInput}`);
+    if (window.playCyberSound) window.playCyberSound('click');
 
     const parts = rawInput.split(' ');
     const cmd = parts[0].toLowerCase();
@@ -371,6 +643,7 @@ Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems.
     if (cmd in commands) {
       const res = commands[cmd](args);
       if (res) printOutput(res);
+      if (window.playCyberSound) window.playCyberSound('success');
     } else if (cmd === 'echo') {
       printOutput(args.join(' '));
     } else {
@@ -381,6 +654,8 @@ Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems.
   }
 
   termInput.addEventListener('keydown', (e) => {
+    if (window.playCyberSound) window.playCyberSound('key');
+
     if (e.key === 'Enter') {
       executeCommand(termInput.value);
       termInput.value = '';
@@ -438,17 +713,68 @@ Type \x1b[36m'help'\x1b[0m or tap the quick buttons above to explore systems.
       .replace(/\x1b\[0m/g, '</span>');
   }
 
+  function triggerScanAnimation() {
+    const ports = [
+      { port: 80, name: 'HTTP Reverse Proxy', status: 'OPEN [301 Redirect]' },
+      { port: 443, name: 'HTTPS TLS 1.3 HTTP/2', status: 'OPEN [ECDSA OK]' },
+      { port: 3000, name: 'Gitea / Web Hub', status: 'OPEN [Proxy Pass]' },
+      { port: 3100, name: 'GAMES-REBORN PM2', status: 'OPEN [Cluster Node]' },
+      { port: 3306, name: 'MariaDB Instance', status: 'PROTECTED [127.0.0.1]' },
+      { port: 4403, name: 'MU3 Auth Gateway', status: 'OPEN [Daemon Core]' },
+      { port: 5222, name: 'MU3 Game Server 01', status: 'OPEN [Asio epoll]' },
+      { port: 8088, name: 'MU3 Admin GM API', status: 'PROTECTED [Nginx Auth]' }
+    ];
+
+    let idx = 0;
+    const interval = setInterval(() => {
+      if (idx < ports.length) {
+        const p = ports[idx];
+        printOutput(`  \x1b[36m[PORT ${p.port}]\x1b[0m ${p.name.padEnd(24)} -> \x1b[32m${p.status}\x1b[0m`);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+        if (window.playCyberSound) window.playCyberSound('key');
+        idx++;
+      } else {
+        clearInterval(interval);
+        printOutput(`\x1b[32m✔ Port audit completed. All 8 active listeners healthy.\x1b[0m`);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
+    }, 120);
+  }
+
+  function triggerHackAnimation() {
+    const hops = [
+      'HOP 01: 127.0.0.1 (Local Gateway) - 0.2ms',
+      'HOP 02: 85.215.227.241 (Frankfurt Edge Core) - 1.1ms',
+      'HOP 03: 10.0.4.1 (PM2 Micro-App Cluster) - 0.4ms',
+      'HOP 04: 127.0.0.1:3306 (MariaDB Connection Pool) - 0.3ms',
+      'HOP 05: /bin/mu3_server (Asynchronous Game Loop) - 0.1ms'
+    ];
+    let idx = 0;
+    const interval = setInterval(() => {
+      if (idx < hops.length) {
+        printOutput(`\x1b[33m⚡ ${hops[idx]}\x1b[0m`);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+        if (window.playCyberSound) window.playCyberSound('key');
+        idx++;
+      } else {
+        clearInterval(interval);
+        printOutput(`\x1b[32m✔ Trace verified: Zero packet loss, 100% throughput integrity.\x1b[0m`);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
+    }, 150);
+  }
+
   function triggerMatrixEffect() {
     let count = 0;
     const interval = setInterval(() => {
       let line = '';
-      for (let i = 0; i < 32; i++) {
+      for (let i = 0; i < 34; i++) {
         line += String.fromCharCode(33 + Math.floor(Math.random() * 90)) + ' ';
       }
       printOutput(`<span style="color:#00df72; opacity:${0.4 + Math.random()*0.6}">${line}</span>`);
       terminalBody.scrollTop = terminalBody.scrollHeight;
       count++;
-      if (count > 8) clearInterval(interval);
+      if (count > 9) clearInterval(interval);
     }, 90);
   }
 }
@@ -465,6 +791,7 @@ function initContactAndCopy() {
       const textToCopy = btn.getAttribute('data-copy') || 'merlin_felix_@hotmail.com';
       navigator.clipboard.writeText(textToCopy).then(() => {
         showToast(`Copied "${textToCopy}" to clipboard!`);
+        if (window.playCyberSound) window.playCyberSound('success');
       }).catch(() => {
         showToast('Direct copy failed. Use merlin_felix_@hotmail.com');
       });
@@ -482,6 +809,7 @@ function initContactAndCopy() {
       const mailtoUrl = `mailto:merlin_felix_@hotmail.com?subject=${encodeURIComponent(subject + ' [via merlin-tribukait.com from ' + name + ']')}&body=${encodeURIComponent(message + '\n\nSender: ' + name + ' (' + email + ')')}`;
       
       showToast('Opening email client for Merlin Tribukait...');
+      if (window.playCyberSound) window.playCyberSound('success');
       window.location.href = mailtoUrl;
     });
   }

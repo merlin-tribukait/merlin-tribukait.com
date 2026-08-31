@@ -28,8 +28,10 @@
 </head>
 <body>
 
-  <!-- Particle Background & Ambient Glow Orbs -->
+  <!-- Particle Background, Ambient Glow Orbs & Cursor Spotlight -->
   <canvas id="bg-canvas"></canvas>
+  <div class="cursor-spotlight"></div>
+  <div class="scanlines"></div>
   <div class="bg-glow-container">
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
@@ -51,7 +53,7 @@
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#stack" class="nav-link">Arsenal</a></li>
         <li><a href="#projects" class="nav-link">Ecosystem</a></li>
-        <li><a href="#notes" class="nav-link">Engineering Notes</a></li>
+        <li><a href="#notes" class="nav-link">Field Notes</a></li>
         <li><a href="#services" class="nav-link">Capabilities</a></li>
         <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
         <li><a href="#terminal" class="nav-link">CLI</a></li>
@@ -59,6 +61,10 @@
       </ul>
 
       <div class="nav-actions">
+        <!-- Audio Synth FX Toggle Button -->
+        <button class="fx-toggle-btn" id="audioFxToggle" title="Toggle Cyber Audio FX" aria-label="Toggle audio effects">
+          🔊
+        </button>
         <div class="status-pill" title="Server online & responding">
           <span class="status-dot"></span>
           <span>ONLINE · 85.215.227.241</span>
@@ -78,7 +84,7 @@
         <div class="hero-badge">
           <span>⚡</span> Full-Stack Systems Architect & Game Core Engineer
         </div>
-        <h1 class="hero-title">Merlin Felix Tribukait</h1>
+        <h1 class="hero-title glitch-text" data-text="Merlin Felix Tribukait">Merlin Felix Tribukait</h1>
         
         <div class="hero-typing">
           <span id="heroTyping"></span>
@@ -129,6 +135,30 @@
           <div class="glass-card stat-card">
             <div class="stat-number">99.9%</div>
             <div class="stat-label">Production Mesh Uptime</div>
+          </div>
+        </div>
+
+        <!-- Live Cyber HUD Telemetry Bar -->
+        <div class="cyber-hud-bar">
+          <div class="hud-item">
+            <span>● EDGE LATENCY:</span>
+            <span class="hud-val" id="hudLatency">12ms</span>
+          </div>
+          <div class="hud-item">
+            <span>● PROTOCOL:</span>
+            <span class="hud-val">TLS 1.3 AES-GCM</span>
+          </div>
+          <div class="hud-item">
+            <span>● PACKETS PROCESSED:</span>
+            <span class="hud-val" id="hudPackets">2,841,920</span>
+          </div>
+          <div class="hud-item">
+            <span>● MARIADB POOL:</span>
+            <span class="hud-val">100% HEALTHY</span>
+          </div>
+          <div class="hud-item">
+            <span>● PM2 CLUSTER:</span>
+            <span class="hud-val">ONLINE</span>
           </div>
         </div>
       </div>
@@ -841,9 +871,11 @@
             <button class="term-quick-btn" data-cmd="help">help</button>
             <button class="term-quick-btn" data-cmd="about">about</button>
             <button class="term-quick-btn" data-cmd="notes">notes</button>
+            <button class="term-quick-btn" data-cmd="scan">scan</button>
             <button class="term-quick-btn" data-cmd="skills">skills</button>
             <button class="term-quick-btn" data-cmd="projects">projects</button>
             <button class="term-quick-btn" data-cmd="specs">specs</button>
+            <button class="term-quick-btn" data-cmd="crt">crt</button>
             <button class="term-quick-btn" data-cmd="matrix">matrix</button>
             <button class="term-quick-btn" data-cmd="clear">clear</button>
           </div>
@@ -854,7 +886,7 @@
         <div style="background: #11111a; padding: 0.75rem 1.5rem; border-top: 1px solid var(--border-subtle);">
           <div class="term-input-row">
             <span class="term-prompt">guest@merlin-tribukait:~$</span>
-            <input type="text" class="term-input" id="termInput" placeholder="Type a command (e.g. 'help', 'notes', 'specs', 'services', 'contact')..." autocomplete="off" spellcheck="false">
+            <input type="text" class="term-input" id="termInput" placeholder="Type a command (e.g. 'help', 'scan', 'notes', 'specs', 'crt')..." autocomplete="off" spellcheck="false">
           </div>
         </div>
       </div>
